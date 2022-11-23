@@ -38,6 +38,7 @@
 
 # Debug files
 .settings/
+Debug/
 *.dSYM/
 *.su
 *.idb
