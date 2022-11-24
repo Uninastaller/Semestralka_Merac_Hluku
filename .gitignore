@@ -37,7 +37,6 @@
 *.hex
 
 # Debug files
-.settings/
 Debug/
 *.dSYM/
 *.su
