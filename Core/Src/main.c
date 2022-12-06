@@ -18,12 +18,16 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "dma.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "tim.h"
 #include "display.h"
+#include "max9812.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,6 +62,7 @@ extern uint64_t actual_time;
 
 uint64_t time_of_last_refresh;
 double test_number = 1024;
+double DB;
 /* USER CODE END 0 */
 
 /**
@@ -73,11 +78,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
-
-  /* System interrupt init*/
-  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -93,8 +94,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_ADC1_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+  Start_ADC_Conversion();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -103,22 +107,22 @@ int main(void)
   DigitsOFF();
   SegmentsOFF();
 
-  MX_TIM2_Init();
-
   while (1)
   {
-	  if(actual_time > (time_of_last_refresh + NUMBER_REFRESH_INTERVAL))
-	  {
-		  setNumberForDisplay(test_number);
-		  test_number -= 0.1;
-		  time_of_last_refresh = actual_time;
-
-		  if(test_number <= 0)
-		  {
-			  LL_mDelay(1000);
-			  test_number = 120;
-		  }
-	  }
+//	  if(actual_time > (time_of_last_refresh + NUMBER_REFRESH_INTERVAL))
+//	  {
+//		  setNumberForDisplay(test_number);
+//		  test_number -= 0.1;
+//		  time_of_last_refresh = actual_time;
+//
+//		  if(test_number <= 0)
+//		  {
+//			  LL_mDelay(1000);
+//			  test_number = 120;
+//		  }
+//	  }
+//
+//	  DB = loop();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -132,8 +136,8 @@ int main(void)
   */
 void SystemClock_Config(void)
 {
-  LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
-  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_0)
+  LL_FLASH_SetLatency(LL_FLASH_LATENCY_2);
+  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_2)
   {
   }
   LL_RCC_HSI_Enable();
@@ -144,18 +148,33 @@ void SystemClock_Config(void)
 
   }
   LL_RCC_HSI_SetCalibTrimming(16);
-  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
-  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
-  LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
-  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
+  LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSI_DIV_2, LL_RCC_PLL_MUL_16);
+  LL_RCC_PLL_Enable();
 
-   /* Wait till System clock is ready */
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
+   /* Wait till PLL is ready */
+  while(LL_RCC_PLL_IsReady() != 1)
   {
 
   }
-  LL_Init1msTick(8000000);
-  LL_SetSystemCoreClock(8000000);
+  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
+  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
+  LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
+  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
+
+   /* Wait till System clock is ready */
+  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
+  {
+
+  }
+  LL_SetSystemCoreClock(64000000);
+
+   /* Update the time base */
+  if (HAL_InitTick (TICK_INT_PRIORITY) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  LL_RCC_SetTIMClockSource(LL_RCC_TIM1_CLKSOURCE_PLL);
+  LL_RCC_SetADCClockSource(LL_RCC_ADC12_CLKSRC_PLL_DIV_1);
 }
 
 /* USER CODE BEGIN 4 */

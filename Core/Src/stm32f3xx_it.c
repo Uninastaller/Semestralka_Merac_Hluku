@@ -22,6 +22,7 @@
 #include "stm32f3xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "adc.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,7 +56,7 @@ extern uint64_t actual_time;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern DMA_HandleTypeDef hdma_adc1;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -185,7 +186,7 @@ void SysTick_Handler(void)
   /* USER CODE BEGIN SysTick_IRQn 0 */
 	actual_time++;
   /* USER CODE END SysTick_IRQn 0 */
-
+  HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
   /* USER CODE END SysTick_IRQn 1 */
@@ -197,6 +198,38 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f3xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles DMA1 channel1 global interrupt.
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+	if(LL_DMA_IsActiveFlag_HT1(DMA1))
+		{
+			for(int i = 0; i < 25; ++i)
+			{
+				valtage[i] = (VOLTAGE_DIVIDER_CONSTANT * ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
+			}
+
+			LL_DMA_ClearFlag_HT1(DMA1);
+			return;
+		}
+  /* USER CODE END DMA1_Channel1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc1);
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
+  if(LL_DMA_IsActiveFlag_TC1(DMA1))
+  	{
+  		for(int i = 25; i < ADC_DMA_BUFFER_SIZE; ++i)
+  		{
+  			valtage[i] = (VOLTAGE_DIVIDER_CONSTANT *ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
+  		}
+
+  		LL_DMA_ClearFlag_TC1(DMA1);
+  		return;
+  	}
+  /* USER CODE END DMA1_Channel1_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 
