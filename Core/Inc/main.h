@@ -46,7 +46,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stm32f3xx_ll_adc.h"
+#include "stm32f3xx_ll_tim.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -85,7 +86,7 @@ void Error_Handler(void);
                                                                  0 bit  for subpriority */
 #endif
 /* USER CODE BEGIN Private defines */
-
+#define NUMBER_REFRESH_INTERVAL	200
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

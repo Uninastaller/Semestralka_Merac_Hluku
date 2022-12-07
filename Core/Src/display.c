@@ -275,13 +275,13 @@ void displayRefresh()
 	}
 }
 
-void TIM2_IRQHandlerr(void)
+void TIM2_IRQHandler(void)
 {
-//	if(LL_TIM_IsActiveFlag_UPDATE(TIM2))
-//	{
+	if(LL_TIM_IsActiveFlag_UPDATE(TIM2))
+	{
 		displayRefresh();
-//	}
+	}
 
-//	LL_TIM_ClearFlag_UPDATE(TIM2);
+	LL_TIM_ClearFlag_UPDATE(TIM2);
 }
 

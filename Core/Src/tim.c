@@ -26,17 +26,17 @@ void MX_TIM2_Init(void)
   LL_TIM_InitTypeDef TIM_InitStruct = {0};
   LL_TIM_OC_InitTypeDef TIM_OC_InitStruct = {0};
 
-  /* Peripheral clock enable /
+  /* Peripheral clock enable */
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
 
-  / TIM2 interrupt Init */
+  /* TIM2 interrupt Init */
   NVIC_SetPriority(TIM2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),2, 2));
   NVIC_EnableIRQ(TIM2_IRQn);
 
   //TIM2 clock = 8MHz
-  TIM_InitStruct.Prescaler = 7999;                                 //1kHz
+  TIM_InitStruct.Prescaler = 7999; 								//1kHz
   TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
-  TIM_InitStruct.Autoreload = 19;                                //20ms
+  TIM_InitStruct.Autoreload = 19;								//20ms
   TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
   LL_TIM_Init(TIM2, &TIM_InitStruct);
 

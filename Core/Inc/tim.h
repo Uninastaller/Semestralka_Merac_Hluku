@@ -39,7 +39,7 @@ extern "C" {
 void MX_TIM1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-//void MX_TIM2_Init(void);
+void MX_TIM2_Init(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "tim.h"
 #include "display.h"
 #include "max9812.h"
 /* USER CODE END Includes */
@@ -101,14 +102,16 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+  MX_TIM2_Init();
   Start_ADC_Conversion();
-//  MX_TIM2_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   DigitsOFF();
   SegmentsOFF();
+
   while (1)
   {
 //	  if(actual_time > (time_of_last_refresh + NUMBER_REFRESH_INTERVAL))

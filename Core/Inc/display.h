@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define DISPLAY_PERIOD 	0 // 1/frequency
+#define DISPLAY_PERIOD 	2 // 1/frequency
 
 #define SEGMENT_A_ON LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_1)
 #define SEGMENT_A_OFF LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_1)
@@ -64,4 +64,4 @@ void setEight();
 void setNine();
 void setZero();
 
-void TIM2_IRQHandlerr(void);
+

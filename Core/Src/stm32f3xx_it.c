@@ -23,7 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "adc.h"
-#include "display.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -206,30 +205,29 @@ void SysTick_Handler(void)
 void DMA1_Channel1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
-//	TIM2_IRQHandlerr();
-	if(LL_DMA_IsActiveFlag_HT1(DMA1))
-	{
-		for(int i = 0; i < 25; ++i)
+		if(LL_DMA_IsActiveFlag_HT1(DMA1))
 		{
-			valtage[i] = (VOLTAGE_DIVIDER_CONSTANT * ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
-		}
+			for(int i = 0; i < 25; ++i)
+			{
+				valtage[i] = (VOLTAGE_DIVIDER_CONSTANT * ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
+			}
 
-		LL_DMA_ClearFlag_HT1(DMA1);
-		return;
-	}
+			LL_DMA_ClearFlag_HT1(DMA1);
+			return;
+		}
   /* USER CODE END DMA1_Channel1_IRQn 0 */
 
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
-	if(LL_DMA_IsActiveFlag_TC1(DMA1))
-	{
-		for(int i = 25; i < ADC_DMA_BUFFER_SIZE; ++i)
+		if(LL_DMA_IsActiveFlag_TC1(DMA1))
 		{
-			valtage[i] = (VOLTAGE_DIVIDER_CONSTANT *ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
-		}
+			for(int i = 25; i < ADC_DMA_BUFFER_SIZE; ++i)
+			{
+				valtage[i] = (VOLTAGE_DIVIDER_CONSTANT *ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
+			}
 
-		LL_DMA_ClearFlag_TC1(DMA1);
-		return;
-	}
+			LL_DMA_ClearFlag_TC1(DMA1);
+			return;
+		}
   /* USER CODE END DMA1_Channel1_IRQn 1 */
 }
 

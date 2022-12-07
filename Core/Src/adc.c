@@ -70,17 +70,16 @@ void MX_ADC1_Init(void)
 
   /* USER CODE BEGIN ADC1_Init 1 */
   // DMA memory setup
-  LL_DMA_ConfigAddresses( DMA1,
-		  	  	  	  	  LL_DMA_CHANNEL_1,
-		  	  	  	  	  LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA),
-						  (uint32_t)adcConvertedDataBuffer,
-						  LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
+    LL_DMA_ConfigAddresses(DMA1,
+  		  	  	  	  	  LL_DMA_CHANNEL_1,
+  		  	  	  	  	  LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA),
+  						  (uint32_t)adcConvertedDataBuffer,
+  						  LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
 
-  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_1, ADC_DMA_BUFFER_SIZE);
-  LL_DMA_EnableIT_TC(DMA1, LL_DMA_CHANNEL_1);
-  LL_DMA_EnableIT_HT(DMA1, LL_DMA_CHANNEL_1);
-  LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_1);
-
+    LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_1, ADC_DMA_BUFFER_SIZE);
+    LL_DMA_EnableIT_TC(DMA1, LL_DMA_CHANNEL_1);
+    LL_DMA_EnableIT_HT(DMA1, LL_DMA_CHANNEL_1);
+    LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_1);
   /* USER CODE END ADC1_Init 1 */
 
   /** Common config
@@ -122,16 +121,16 @@ void MX_ADC1_Init(void)
   LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SAMPLINGTIME_1CYCLE_5);
   LL_ADC_SetChannelSingleDiff(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SINGLE_ENDED);
   /* USER CODE BEGIN ADC1_Init 2 */
-    LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SAMPLINGTIME_601CYCLES_5);
-	LL_ADC_StartCalibration(ADC1, LL_ADC_SINGLE_ENDED);
-	// Calibration has started
-	LL_mDelay(1);
-	// Wait for calibration end
-	while(LL_ADC_IsCalibrationOnGoing(ADC1)){LL_mDelay(1);}
-	// Enable ADC1
-	LL_ADC_Enable(ADC1);
-	// Wait for ADC1 to get ready to start conversions
-	while(!LL_ADC_IsActiveFlag_ADRDY(ADC1)){LL_mDelay(1);}
+  LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_1, LL_ADC_SAMPLINGTIME_601CYCLES_5);
+  LL_ADC_StartCalibration(ADC1, LL_ADC_SINGLE_ENDED);
+  // Calibration has started
+  LL_mDelay(1);
+  // Wait for calibration end
+  while(LL_ADC_IsCalibrationOnGoing(ADC1)){LL_mDelay(1);}
+  // Enable ADC1
+  LL_ADC_Enable(ADC1);
+  // Wait for ADC1 to get ready to start conversions
+  while(!LL_ADC_IsActiveFlag_ADRDY(ADC1)){LL_mDelay(1);}
   /* USER CODE END ADC1_Init 2 */
 
 }
