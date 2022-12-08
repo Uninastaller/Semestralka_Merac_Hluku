@@ -28,10 +28,10 @@ Budeme používať mikrofón s analógovým výstupom  [CJMCU-9812](https://data
 
 ### Zapojenie hardwaru:
 <p align="center">
-    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/blob/main/Img/7segm-disp3.png">
+    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/blob/main/Img/7segm-disp3.jpg">
 </p>
 
 <p align="center">
-    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/blob/main/Img/7segm-disp4.png">
+    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/blob/main/Img/7segm-disp4.jpg">
 </p>
 
