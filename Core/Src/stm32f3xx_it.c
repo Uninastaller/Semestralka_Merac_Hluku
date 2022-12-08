@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "adc.h"
+#include "max9812.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -205,12 +206,22 @@ void SysTick_Handler(void)
 void DMA1_Channel1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+
+
+
 		if(LL_DMA_IsActiveFlag_HT1(DMA1))
 		{
-			for(int i = 0; i < 25; ++i)
-			{
-				voltage[i] = (VOLTAGE_DIVIDER_CONSTANT * ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
-				actual_voltage = voltage[i];
+//			for(int i = 0; i < ADC_DMA_BUFFER_SIZE/2; ++i)
+//			{
+//				voltage[i] = (VOLTAGE_DIVIDER_CONSTANT * ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
+////				actual_voltage = voltage[i];
+//			}
+			for (int i = 0; i < ADC_DMA_BUFFER_SIZE/2; i++) {
+				if (adcConvertedDataBuffer[i] > signalMax) {
+					signalMax = adcConvertedDataBuffer[i];
+				} else if (adcConvertedDataBuffer[i] < signalMin) {
+					signalMin = adcConvertedDataBuffer[i];
+				}
 			}
 
 			LL_DMA_ClearFlag_HT1(DMA1);
@@ -221,10 +232,17 @@ void DMA1_Channel1_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
 		if(LL_DMA_IsActiveFlag_TC1(DMA1))
 		{
-			for(int i = 25; i < ADC_DMA_BUFFER_SIZE; ++i)
-			{
-				voltage[i] = (VOLTAGE_DIVIDER_CONSTANT *ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
-				actual_voltage = voltage[i];
+//			for(int i = ADC_DMA_BUFFER_SIZE/2; i < ADC_DMA_BUFFER_SIZE; ++i)
+//			{
+//				voltage[i] = (VOLTAGE_DIVIDER_CONSTANT *ADC_VDDA_VOLTAGE * adcConvertedDataBuffer[i])/ADC_RESOLUTION_MAX_VALUE;
+////				actual_voltage = voltage[i];
+//			}
+			for (int i = ADC_DMA_BUFFER_SIZE/2; i < ADC_DMA_BUFFER_SIZE; i++) {
+				if (adcConvertedDataBuffer[i] > signalMax) {
+					signalMax = adcConvertedDataBuffer[i];
+				} else if (adcConvertedDataBuffer[i] < signalMin) {
+					signalMin = adcConvertedDataBuffer[i];
+				}
 			}
 
 			LL_DMA_ClearFlag_TC1(DMA1);

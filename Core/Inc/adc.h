@@ -33,9 +33,9 @@ extern "C" {
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
-#define ADC_DMA_BUFFER_SIZE			50
+#define ADC_DMA_BUFFER_SIZE			100
 #define VOLTAGE_DIVIDER_CONSTANT	1.0
-#define ADC_RESOLUTION_MAX_VALUE	1023.0
+#define ADC_RESOLUTION_MAX_VALUE	4096.0
 #define ADC_VDDA_VOLTAGE			5
 /* USER CODE END Private defines */
 

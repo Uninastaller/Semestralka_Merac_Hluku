@@ -86,7 +86,7 @@ void Error_Handler(void);
                                                                  0 bit  for subpriority */
 #endif
 /* USER CODE BEGIN Private defines */
-#define NUMBER_REFRESH_INTERVAL	100
+#define NUMBER_REFRESH_INTERVAL	1000
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
