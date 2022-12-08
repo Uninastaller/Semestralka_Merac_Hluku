@@ -118,7 +118,7 @@ int main(void)
 	  {
 		  setNumberForDisplay(loop());
 //		  test_number -= 0.1;
-//		  time_of_last_refresh = actual_time;
+		  time_of_last_refresh = actual_time;
 //
 //		  if(test_number <= 0)
 //		  {
