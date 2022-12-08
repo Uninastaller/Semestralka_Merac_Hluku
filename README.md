@@ -10,3 +10,16 @@ Budeme používať mikrofón s analógovým výstupom  [CJMCU-9812](https://data
 ### Rozdelenie úloh:
 - Zobrazovanie dát na 7-segmentovom displeji
 - Získanie decibelov zo senzora
+- Vytvorenie knižnice pre mikrofón
+- Vytvorenie knižnice pre 7-segmentový displej
+- Vypracovanie dokumentácie
+### Členovia tímu:
+##### Lizák Tomáš, Martišová Silvia, Prihodová Silvia
+### 7-segmentový displej:
+<p align="center">
+    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/Img/7segm-disp1>
+</p>
+### Princíp konfigurácie displeja:
+<p align="center">
+    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/Img/7segm-disp2>
+</p>
