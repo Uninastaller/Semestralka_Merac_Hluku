@@ -1,5 +1,5 @@
 #include "main.h"
 
-double loop();
+double VoltsToDecibels();
 uint32_t read_analog();
 

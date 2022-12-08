@@ -116,7 +116,7 @@ int main(void)
   {
 	  if(actual_time > (time_of_last_refresh + NUMBER_REFRESH_INTERVAL))
 	  {
-		  setNumberForDisplay(loop());
+		  setNumberForDisplay(VoltsToDecibels());
 //		  test_number -= 0.1;
 		  time_of_last_refresh = actual_time;
 //
