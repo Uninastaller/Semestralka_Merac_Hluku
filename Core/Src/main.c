@@ -114,9 +114,9 @@ int main(void)
 
   while (1)
   {
-//	  if(actual_time > (time_of_last_refresh + NUMBER_REFRESH_INTERVAL))
-//	  {
-		  setNumberForDisplay(test_number);
+	  if(actual_time > (time_of_last_refresh + NUMBER_REFRESH_INTERVAL))
+	  {
+		  setNumberForDisplay(loop());
 //		  test_number -= 0.1;
 //		  time_of_last_refresh = actual_time;
 //
@@ -125,7 +125,7 @@ int main(void)
 //			  LL_mDelay(1000);
 //			  test_number = 120;
 //		  }
-//	  }
+	  }
 //
 //	  DB = loop();
     /* USER CODE END WHILE */

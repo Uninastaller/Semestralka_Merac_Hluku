@@ -22,7 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 uint16_t adcConvertedDataBuffer[ADC_DMA_BUFFER_SIZE];
-double valtage[ADC_DMA_BUFFER_SIZE];
+double voltage[ADC_DMA_BUFFER_SIZE];
+double actual_voltage = 0;
 /* USER CODE END 0 */
 
 /* ADC1 init function */
