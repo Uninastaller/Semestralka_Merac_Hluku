@@ -17,9 +17,9 @@ Budeme používať mikrofón s analógovým výstupom  [CJMCU-9812](https://data
 ##### Lizák Tomáš, Martišová Silvia, Prihodová Silvia
 ### 7-segmentový displej:
 <p align="center">
-    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/Img/7segm-disp1>
+    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/blob/main/Img/7segm-disp1.png">
 </p>
 ### Princíp konfigurácie displeja:
 <p align="center">
-    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/Img/7segm-disp2>
+    <img src="https://github.com/Uninastaller/Semestralka_Merac_Hluku/blob/main/Img/7segm-disp2.png">
 </p>
