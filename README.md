@@ -13,9 +13,11 @@ Budeme používať mikrofón s analógovým výstupom  [CJMCU-9812](https://data
 - Prepočet výstupu na dB
 - Vytvorenie knižnice pre mikrofón
 - Vytvorenie knižnice pre 7-segmentový displej
-- Vypracovanie dokumentácie
+- Vypracovanie prezentácie
 ### Členovia tímu:
 ##### Lizák Tomáš, Martišová Silvia, Prihodová Silvia
+
+## Vizuálne znázornené komponenty semestrálnej práce:
 
 ### Zobrazenie číslic na 7-segmentovom displeji:
 <p align="center">
