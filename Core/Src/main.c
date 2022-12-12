@@ -61,8 +61,6 @@ void SystemClock_Config(void);
 extern uint64_t actual_time;
 
 uint64_t time_of_last_refresh;
-double test_number = 1024;
-double DB;
 /* USER CODE END 0 */
 
 /**
@@ -117,17 +115,9 @@ int main(void)
 	  if(actual_time > (time_of_last_refresh + NUMBER_REFRESH_INTERVAL))
 	  {
 		  setNumberForDisplay(VoltsToDecibels());
-//		  test_number -= 0.1;
 		  time_of_last_refresh = actual_time;
-//
-//		  if(test_number <= 0)
-//		  {
-//			  LL_mDelay(1000);
-//			  test_number = 120;
-//		  }
 	  }
-//
-//	  DB = loop();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

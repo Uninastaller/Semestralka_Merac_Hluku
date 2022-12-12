@@ -34,9 +34,8 @@ extern "C" {
 
 /* USER CODE BEGIN Private defines */
 #define ADC_DMA_BUFFER_SIZE			100
-#define VOLTAGE_DIVIDER_CONSTANT	1.0
-#define ADC_RESOLUTION_MAX_VALUE	4096.0
-#define ADC_VDDA_VOLTAGE			5
+#define ADC_RESOLUTION_MAX_VALUE	4095.0
+#define ADC_VDDA_VOLTAGE			5.0
 /* USER CODE END Private defines */
 
 void MX_ADC1_Init(void);
